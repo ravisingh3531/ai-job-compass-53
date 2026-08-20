@@ -43,6 +43,7 @@ import {
   managerSignals,
   costScenarios,
 } from "@/lib/ranking-data";
+import { faqs } from "@/lib/deep-data";
 
 const title = "Top 10 Best AI Institutes in India (2026) — Job-Outcome Ranking";
 const description =
