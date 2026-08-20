@@ -7,6 +7,7 @@ import {
   DataTable,
   Callout,
   CoverageTable,
+  Reveal,
 } from "@/components/article/primitives";
 import {
   tocItems,
