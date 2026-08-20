@@ -43,6 +43,14 @@ import {
   costScenarios,
 } from "@/lib/ranking-data";
 import { faqs } from "@/lib/deep-data";
+import { beginnerFaqs } from "@/lib/beginner-data";
+import { CourseQuiz } from "@/components/article/quiz";
+import {
+  BeginnerRecommendation,
+  ResearchProcess,
+  HowToChooseBeginner,
+  BeyondMarketing,
+} from "@/components/article/beginner-sections";
 import { ProfileProvider } from "@/components/article/profile-context";
 import {
   ProfileBar,
@@ -52,9 +60,9 @@ import {
 } from "@/components/article/profile-sections";
 import { CompareMode } from "@/components/article/compare-mode";
 
-const title = "Top 10 Best AI Institutes in India (2026) — Job-Outcome Ranking";
+const title = "Top 10 Best AI Institutes in India (2026) — GenAI Courses for Beginners";
 const description =
-  "An honest, methodology-first ranking of the top 10 AI institutes in India for 2026 — scored on JD alignment, portfolio output, interview readiness, placement mechanism, currency and cost.";
+  "An honest ranking of India's top 10 AI & GenAI courses for beginners in 2026 — beginner ramp-up, LLM/RAG/agents curriculum depth, placement support, mock interviews and verified student outcomes.";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -72,7 +80,7 @@ export const Route = createFileRoute("/")({
         children: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "FAQPage",
-          mainEntity: faqs.map((f) => ({
+          mainEntity: [...beginnerFaqs, ...faqs].map((f) => ({
             "@type": "Question",
             name: f.q,
             acceptedAnswer: { "@type": "Answer", text: f.a },
@@ -101,13 +109,18 @@ function Index() {
         <HiringReality />
         <SkillsStack />
         <Methodology />
+        <ResearchProcess />
         <Rankings />
         <CompareMode />
         <WhyLogicMojo />
+        <BeginnerRecommendation />
         <LogicMojoDeepDive />
         <InDepthReviews />
+        <CourseQuiz />
+        <HowToChooseBeginner />
         <WhichForYou />
         <DecisionTree />
+        <BeyondMarketing />
         <RedFlags />
         <Roadmap />
         <FinalVerdict />
