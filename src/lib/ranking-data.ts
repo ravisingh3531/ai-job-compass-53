@@ -2,6 +2,7 @@ export type Row = string[];
 
 export const tocItems = [
   { id: "your-profile", label: "Personalise for Your Profile" },
+  { id: "how-we-know", label: "How We Know What We Claim" },
   { id: "hiring-reality", label: "The 2026 AI Hiring Reality" },
   { id: "skills-stack", label: "The Skills That Must Be Taught" },
   { id: "methodology", label: "Methodology" },

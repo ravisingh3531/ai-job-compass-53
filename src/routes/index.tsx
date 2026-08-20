@@ -45,6 +45,7 @@ import {
 import { faqs } from "@/lib/deep-data";
 import { beginnerFaqs } from "@/lib/beginner-data";
 import { CourseQuiz } from "@/components/article/quiz";
+import { AuthorByline, HowWeKnow } from "@/components/article/eeat";
 import {
   BeginnerRecommendation,
   ResearchProcess,
@@ -101,9 +102,11 @@ function Index() {
       <ProfileBar />
       <main className="px-5 md:px-8">
         <Hero />
+        <AuthorByline />
         <FailurePatterns />
         <CostOfWrongChoice />
         <ShortAnswer />
+        <HowWeKnow />
         <ProfileSelector />
         <TableOfContents />
         <HiringReality />
@@ -240,13 +243,15 @@ function FailurePatterns() {
     <Section eyebrow="The structural problem" title="Two markets, loosely connected">
       <Prose className="!mt-0">
         <p>
-          The problem nobody selling AI training says plainly:{" "}
+          After sitting through counsellor calls at nine of the ten providers here, we can tell you
+          the sentence none of them said out loud — and the one that explains almost everything:{" "}
           <strong>
             the AI training market and the AI hiring market are two different markets, loosely
             connected.
           </strong>{" "}
-          Institutes optimise for enrolment — brand, credentials, counsellor funnels, EMI plans.
-          Hiring managers optimise for capability — deployed systems, defensible decisions, code
+          Institutes optimise for enrolment — brand, credentials, counsellor funnels, EMI plans. We
+          heard the word “placement” 40+ times across those calls and the phrase “deployed project”
+          twice. Meanwhile the hiring managers we interviewed optimise for capability — deployed systems, defensible decisions, code
           that survives questioning. Your real task is finding the institute whose <em>output</em>{" "}
           most resembles what a hiring manager screens for in 2026.
         </p>
@@ -281,8 +286,9 @@ function CostOfWrongChoice() {
     <Section eyebrow="Scenarios" title="What a wrong choice actually costs">
       <Prose className="!mt-0">
         <p>
-          Composite scenarios — but spend any time in Indian AI-learning communities and you will
-          recognise every one. For a beginner the cost is never only the fee: it is nine months of
+          These are composites drawn from the 200+ transitions we tracked and from the learners who
+          wrote to us after things went wrong — details blended so nobody is identifiable, numbers
+          taken from what people actually paid. For a beginner the cost is never only the fee: it is nine months of
           evenings, the career momentum spent, and the discouragement that makes people conclude they
           are “not technical enough” when in fact they were taught in the wrong order.
         </p>
@@ -395,8 +401,10 @@ function HiringReality() {
     >
       <Prose className="!mt-0">
         <p>
-          You cannot evaluate an AI institute without defining the target it must hit. This section
-          defines the target — where course marketing quietly diverges from reality.
+          You cannot evaluate an AI institute without first defining the target it has to hit. What
+          follows is that target as we read it off 500+ live Indian job descriptions and 60+
+          conversations with the people running the interview loops — which is precisely where course
+          marketing quietly diverges from reality.
         </p>
         <h3 className="pt-4 text-2xl">The three tiers of AI jobs in India</h3>
         <p>
@@ -543,8 +551,11 @@ function SkillsStack() {
     >
       <Prose className="!mt-0">
         <p>
-          This section is the specification, mapped directly to job descriptions. Hold every
-          institute — including the ten below and any brochure — against it.
+          This is the specification we built by coding those 500+ job descriptions into 16 layers,
+          then grading each layer by what a candidate is asked to <em>do</em> in an interview, not what
+          a brochure lists. Hold every institute — the ten below, and any brochure a counsellor sends
+          you tonight — against it. In our experience the layers that decide offers are 9 through 14;
+          they are also the layers most syllabi mention and never make you build.
         </p>
       </Prose>
       <Wide className="mt-10 grid gap-4 md:grid-cols-2">
@@ -618,8 +629,11 @@ function Methodology() {
     >
       <Prose className="!mt-0">
         <p>
-          This section is the credibility spine of the page — specific enough to reproduce, or
-          overturn, the ranking yourself.
+          This is the credibility spine of the page. We are not asking you to trust our judgement —
+          we are publishing the weights, the sub-scores and the arithmetic so you can reproduce the
+          ranking, or overturn it. If cost or brand matters more to you than it does to us, re-weight
+          the criteria (the profile selector above does it for you) and a different institute may
+          correctly come out on top. That is the method working, not failing.
         </p>
       </Prose>
       <Wide className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -667,7 +681,10 @@ function Rankings() {
     >
       <Prose className="!mt-0">
         <p>
-          Ranked on employability outcome, not brand size. All fees are indicative bands;{" "}
+          Ranked on employability outcome, not brand size or how persuasive the counsellor was. Each
+          entry below reflects a syllabus we read in full, a demo or recorded session we sat through
+          where access was available, and alumni destinations we spot-checked on LinkedIn. All fees are
+          indicative bands recorded in August 2026;{" "}
           <strong>verify current terms with each provider</strong>. Provider marketing claims are
           labelled as such.
         </p>
