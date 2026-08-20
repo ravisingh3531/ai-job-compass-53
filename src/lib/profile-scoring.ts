@@ -141,8 +141,8 @@ export const profiles: Profile[] = [
   },
 ];
 
-export const profileById = (id: ProfileId) =>
-  profiles.find((p) => p.id === id) ?? profiles[0];
+export const profileById = (id: ProfileId): Profile =>
+  profiles.find((p) => p.id === id) ?? (profiles[0] as Profile);
 
 const subScores: Record<string, Record<CriterionKey, number>> = Object.fromEntries(
   scorecard.rows.map((row) => [
