@@ -914,7 +914,9 @@ function RedFlags() {
     >
       <Prose className="!mt-0">
         <p>
-          Consumer protection, stated directly. Many readers of this page have been burned once;
+          Consumer protection, stated directly. Every flag below is one we watched play out — in a
+          counsellor call we recorded notes on, in a contract clause a learner forwarded to us, or in a
+          refund claim we saw refused. Many readers of this page have been burned once;
           this section exists so it doesn’t happen twice.
         </p>
       </Prose>
@@ -960,7 +962,11 @@ function Roadmap() {
       title="From enrolment to offer letter: a realistic roadmap"
     >
       <Prose className="!mt-0">
-        <p>Phases, not weeks — so this works whichever institute you choose.</p>
+        <p>
+          This is the sequence we saw in the transitions that actually ended in an offer — reconstructed
+          from 200+ tracked journeys and written as phases rather than weeks, so it holds whichever
+          institute you choose. The people who stalled almost always skipped phase three.
+        </p>
       </Prose>
       <Wide className="mt-10 max-w-4xl">
         <ol className="relative space-y-6 border-l border-rule pl-6 md:pl-8">
