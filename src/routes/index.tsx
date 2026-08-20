@@ -27,7 +27,6 @@ import {
   layers,
   coverageTest,
   criteria,
-  masterRanking,
   scorecard,
   coverageRowLabels,
   coverageA,
@@ -44,6 +43,13 @@ import {
   costScenarios,
 } from "@/lib/ranking-data";
 import { faqs } from "@/lib/deep-data";
+import { ProfileProvider } from "@/components/article/profile-context";
+import {
+  ProfileBar,
+  ProfileSelector,
+  ProfileRankingList,
+  ProfileScorecard,
+} from "@/components/article/profile-sections";
 
 const title = "Top 10 Best AI Institutes in India (2026) — Job-Outcome Ranking";
 const description =
@@ -80,13 +86,16 @@ export const Route = createFileRoute("/")({
 
 function Index() {
   return (
+    <ProfileProvider>
     <div className="min-h-screen bg-background">
       <TopBar />
+      <ProfileBar />
       <main className="px-5 md:px-8">
         <Hero />
         <FailurePatterns />
         <CostOfWrongChoice />
         <ShortAnswer />
+        <ProfileSelector />
         <TableOfContents />
         <HiringReality />
         <SkillsStack />
@@ -109,6 +118,7 @@ function Index() {
       </main>
       <Footer />
     </div>
+    </ProfileProvider>
   );
 }
 
@@ -641,61 +651,7 @@ function Rankings() {
         </p>
       </Prose>
 
-      <Wide className="mt-10 space-y-4">
-        {masterRanking.map((r) => (
-          <article
-            key={r.rank}
-            className={`grid gap-5 rounded-2xl border bg-card p-6 shadow-card card-hover md:grid-cols-[auto_1fr_auto] md:items-center ${
-              r.rank === 1 ? "border-accent/40 bg-highlight" : "border-rule"
-            }`}
-          >
-            <div className="flex items-center gap-4 md:w-20 md:flex-col md:items-start">
-              <span className="font-mono text-xs tracking-[0.16em] text-muted-foreground">
-                #{String(r.rank).padStart(2, "0")}
-              </span>
-            </div>
-            <div>
-              <h3 className="text-xl md:text-2xl">
-                {r.name}{" "}
-                <span className="font-sans text-base font-normal text-muted-foreground">
-                  — {r.program}
-                </span>
-              </h3>
-              <p className="mt-2 text-[0.98rem] text-foreground/80">{r.best}</p>
-              <dl className="mt-4 flex flex-wrap gap-x-6 gap-y-2 font-mono text-[0.72rem] uppercase tracking-[0.1em] text-muted-foreground">
-                <div>
-                  <dt className="inline">Fees · </dt>
-                  <dd className="inline text-foreground/75">{r.fees}</dd>
-                </div>
-                <div>
-                  <dt className="inline">Duration · </dt>
-                  <dd className="inline text-foreground/75">{r.duration}</dd>
-                </div>
-                <div>
-                  <dt className="inline">Format · </dt>
-                  <dd className="inline text-foreground/75">{r.format}</dd>
-                </div>
-                <div>
-                  <dt className="inline">Target · </dt>
-                  <dd className="inline text-foreground/75">{r.tier}</dd>
-                </div>
-              </dl>
-            </div>
-            <div className="md:w-40">
-              <p className="font-display text-4xl font-semibold text-accent">
-                {r.score}
-                <span className="text-lg text-muted-foreground">/100</span>
-              </p>
-              <div className="mt-2 h-1.5 w-full rounded-full bg-secondary">
-                <div className="score-bar" style={{ width: `${r.score}%` }} />
-              </div>
-              <p className="mt-2 font-mono text-[0.62rem] uppercase tracking-[0.14em] text-muted-foreground">
-                Job-outcome score
-              </p>
-            </div>
-          </article>
-        ))}
-      </Wide>
+      <ProfileRankingList />
 
       <Prose className="mt-10">
         <p>
@@ -714,6 +670,15 @@ function Rankings() {
           note="Sub-scores are out of each criterion's weight and sum to the totals above — add them yourself."
         >
           <DataTable head={scorecard.head} rows={scorecard.rows} emphasiseFirstRow compact />
+        </TableCard>
+      </div>
+      <div className="mt-8">
+        <TableCard
+          label="Table 2b · live"
+          title="The same arithmetic, re-weighted for your profile"
+          note="Changes instantly when you switch profile above. Fit adj. accounts for format, price and cohort reality."
+        >
+          <ProfileScorecard />
         </TableCard>
       </div>
       <div className="mt-8">
