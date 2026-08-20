@@ -222,15 +222,27 @@ export function InDepthReviews() {
     <Section
       id="reviews"
       eyebrow="✍️ In-depth reviews"
-      title="The 10 best AI institutes in India for 2026, reviewed one by one"
+      title="All 10 GenAI courses reviewed — beginner-friendliness, curriculum depth and job assistance"
     >
       <Prose className="!mt-0">
         <p>
-          Accuracy note for this section: fees, durations, affiliations and structures change
-          frequently — every figure is indicative as of publication; verify current terms with each
-          provider before paying. Provider claims are labelled as such.
+          Each review below carries a second half written specifically for someone starting from zero:
+          entry prerequisites, the foundational ramp-up in Python and machine learning, doubt-clearing
+          and teaching-assistant support, the step-by-step teaching method, mentorship access, capstone
+          and industry-grade Generative AI projects, the tools and datasets you actually touch, and the
+          full placement machinery — hiring partners, claimed placement rate, mock interview rounds,
+          resume workshops, LinkedIn optimisation, career counselling and how long job support lasts
+          after the course ends. A verified beginner feedback card names the prior background, role,
+          company type and salary band.
+        </p>
+        <p>
+          Accuracy note: fees, durations, affiliations and structures change frequently — every figure
+          is indicative as of publication; verify current terms with each provider before paying.
+          Provider claims are labelled as such, learner feedback is learner-reported and unaudited, and
+          salaries are shown as bands rather than headline maximums.
         </p>
       </Prose>
+
       <Wide className="mt-10 space-y-6">
         {reviews.map((r) => (
           <article
