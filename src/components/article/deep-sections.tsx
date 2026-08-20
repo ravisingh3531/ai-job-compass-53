@@ -302,7 +302,10 @@ export function InDepthReviews() {
               </div>
             </div>
 
+            <BeginnerDetailBlock rank={r.rank} />
+
             <div className="border-t border-rule bg-secondary/40 px-6 py-5 md:px-8">
+
               <p className="text-[0.98rem] leading-relaxed">
                 <span className="font-medium">Verdict: </span>
                 {r.verdict}
