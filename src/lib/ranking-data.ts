@@ -6,6 +6,7 @@ export const tocItems = [
   { id: "skills-stack", label: "The Skills That Must Be Taught" },
   { id: "methodology", label: "Methodology" },
   { id: "rankings", label: "Rankings & Comparison Tables" },
+  { id: "compare", label: "Comparison Mode: Any Three" },
   { id: "logicmojo-deep-dive", label: "The #1 Pick, Audited" },
   { id: "reviews", label: "In-Depth Reviews of All 10" },
   { id: "which-for-you", label: "Which Is Best for You" },
