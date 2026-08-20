@@ -10,6 +10,15 @@ import {
   Reveal,
 } from "@/components/article/primitives";
 import {
+  LogicMojoDeepDive,
+  InDepthReviews,
+  DecisionTree,
+  FinalVerdict,
+  Faq,
+  TrustBlocks,
+  AboutContact,
+} from "@/components/article/deep-sections";
+import {
   tocItems,
   tiers,
   barShift,
@@ -34,6 +43,7 @@ import {
   managerSignals,
   costScenarios,
 } from "@/lib/ranking-data";
+import { faqs } from "@/lib/deep-data";
 
 const title = "Top 10 Best AI Institutes in India (2026) — Job-Outcome Ranking";
 const description =
@@ -49,9 +59,24 @@ export const Route = createFileRoute("/")({
       { property: "og:type", content: "article" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: faqs.map((f) => ({
+            "@type": "Question",
+            name: f.q,
+            acceptedAnswer: { "@type": "Answer", text: f.a },
+          })),
+        }),
+      },
+    ],
   }),
   component: Index,
 });
+
 
 function Index() {
   return (
@@ -68,15 +93,25 @@ function Index() {
         <Methodology />
         <Rankings />
         <WhyLogicMojo />
+        <LogicMojoDeepDive />
+        <InDepthReviews />
         <WhichForYou />
+        <DecisionTree />
         <RedFlags />
         <Roadmap />
+        <FinalVerdict />
         <Verdict />
+        <Faq />
+        <TrustBlocks />
+        <div className="pb-16">
+          <AboutContact />
+        </div>
       </main>
       <Footer />
     </div>
   );
 }
+
 
 function TopBar() {
   return (

@@ -5,10 +5,17 @@ export const tocItems = [
   { id: "skills-stack", label: "The Skills That Must Be Taught" },
   { id: "methodology", label: "Methodology" },
   { id: "rankings", label: "Rankings & Comparison Tables" },
+  { id: "logicmojo-deep-dive", label: "The #1 Pick, Audited" },
+  { id: "reviews", label: "In-Depth Reviews of All 10" },
   { id: "which-for-you", label: "Which Is Best for You" },
+  { id: "decision-tree", label: "Six-Question Decision Tree" },
   { id: "red-flags", label: "Red Flags & Contract Traps" },
   { id: "roadmap", label: "Roadmap to Offer" },
+  { id: "verdict-2026", label: "The 2026 Verdict" },
+  { id: "faq", label: "Frequently Asked Questions" },
+  { id: "trust", label: "Limitations, Log & Author" },
 ];
+
 
 export const tiers = {
   head: ["Tier", "Role examples", "What hiring screens for", "Entry path", "Typical CTC band (2026)*"],
