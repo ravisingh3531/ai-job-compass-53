@@ -15,6 +15,8 @@ import {
 } from "@/lib/deep-data";
 import { beginnerFaqs } from "@/lib/beginner-data";
 import { BeginnerDetailBlock } from "./beginner-sections";
+import { cn } from "@/lib/utils";
+
 
 
 /* ------------------------------------------------------------------ */
