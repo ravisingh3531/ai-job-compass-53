@@ -1,5 +1,53 @@
-import type { ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import { cn } from "@/lib/utils";
+
+/** Fades + lifts content into view on scroll. */
+export function Reveal({
+  children,
+  delay = 0,
+  className,
+  as: Tag = "div",
+}: {
+  children: ReactNode;
+  delay?: number;
+  className?: string;
+  as?: "div" | "section" | "article" | "figure" | "aside" | "header";
+}) {
+  const ref = useRef<HTMLElement | null>(null);
+  const [shown, setShown] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    if (typeof IntersectionObserver === "undefined") {
+      setShown(true);
+      return;
+    }
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (e.isIntersecting) {
+            setShown(true);
+            io.disconnect();
+          }
+        }
+      },
+      { rootMargin: "0px 0px -8% 0px", threshold: 0.08 },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  return (
+    <Tag
+      ref={ref as never}
+      style={{ transitionDelay: `${delay}ms` }}
+      className={cn("reveal", shown && "reveal-in", className)}
+    >
+      {children}
+    </Tag>
+  );
+}
 
 export function Section({
   id,
@@ -17,12 +65,18 @@ export function Section({
   return (
     <section id={id} className={cn("scroll-mt-24 py-14 md:py-20", className)}>
       {(eyebrow || title) && (
-        <header className="mx-auto max-w-3xl">
-          {eyebrow && <p className="eyebrow mb-3">{eyebrow}</p>}
+        <Reveal as="header" className="mx-auto max-w-3xl">
+          {eyebrow && (
+            <p className="eyebrow mb-3">
+              <span className="inline-block size-1.5 rounded-full bg-accent" />
+              {eyebrow}
+            </p>
+          )}
           {title && (
             <h2 className="text-3xl leading-tight md:text-[2.6rem]">{title}</h2>
           )}
-        </header>
+          <span className="mt-5 block h-px w-24 bg-gradient-to-r from-accent to-transparent" />
+        </Reveal>
       )}
       <div className="mt-8">{children}</div>
     </section>
@@ -31,19 +85,19 @@ export function Section({
 
 export function Prose({ children, className }: { children: ReactNode; className?: string }) {
   return (
-    <div
+    <Reveal
       className={cn(
         "mx-auto max-w-3xl space-y-5 text-[1.0625rem] leading-[1.75] text-foreground/85",
         className,
       )}
     >
       {children}
-    </div>
+    </Reveal>
   );
 }
 
 export function Wide({ children, className }: { children: ReactNode; className?: string }) {
-  return <div className={cn("mx-auto max-w-6xl", className)}>{children}</div>;
+  return <Reveal className={cn("mx-auto max-w-6xl", className)}>{children}</Reveal>;
 }
 
 export function TableCard({
@@ -58,14 +112,18 @@ export function TableCard({
   children: ReactNode;
 }) {
   return (
-    <figure className="mx-auto max-w-6xl overflow-hidden rounded-xl border border-rule bg-card shadow-card">
-      <figcaption className="border-b border-rule px-5 py-4 md:px-7">
+    <Reveal
+      as="figure"
+      className="mx-auto max-w-6xl overflow-hidden rounded-2xl border border-rule bg-card shadow-card card-hover"
+    >
+      <figcaption className="relative border-b border-rule bg-gradient-to-br from-secondary/80 to-card px-5 py-5 md:px-7">
+        <span className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent/60 to-transparent" />
         {label && <p className="eyebrow mb-1.5">{label}</p>}
         <h3 className="text-lg md:text-xl">{title}</h3>
         {note && <p className="mt-2 text-sm text-muted-foreground">{note}</p>}
       </figcaption>
       <div className="overflow-x-auto">{children}</div>
-    </figure>
+    </Reveal>
   );
 }
 
@@ -100,8 +158,8 @@ export function DataTable({
           <tr
             key={i}
             className={cn(
-              "border-b border-border/70 last:border-0 align-top transition-colors hover:bg-secondary/40",
-              emphasiseFirstRow && i === 0 && "bg-highlight/40",
+              "border-b border-border/70 last:border-0 align-top transition-colors hover:bg-accent-soft/40",
+              emphasiseFirstRow && i === 0 && "bg-highlight",
             )}
           >
             {row.map((cell, j) => (
@@ -132,20 +190,31 @@ export function Callout({
   children: ReactNode;
 }) {
   const tones = {
-    neutral: "border-rule bg-secondary/60",
-    accent: "border-accent/35 bg-highlight/45",
-    warn: "border-destructive/30 bg-destructive/8",
+    neutral: "border-l-rule bg-secondary/70",
+    accent: "border-l-accent bg-highlight",
+    warn: "border-l-destructive/60 bg-destructive/8",
   } as const;
   return (
-    <aside
+    <Reveal
+      as="aside"
       className={cn(
-        "mx-auto max-w-3xl rounded-lg border-l-4 px-5 py-4 text-[1.0625rem] leading-relaxed",
+        "mx-auto max-w-3xl rounded-xl border border-border border-l-4 px-5 py-5 text-[1.0625rem] leading-relaxed shadow-card",
         tones[tone],
       )}
     >
       {title && <p className="mb-2 font-display text-lg font-semibold">{title}</p>}
       <div className="space-y-3 text-foreground/85">{children}</div>
-    </aside>
+    </Reveal>
+  );
+}
+
+/** Small pull-out note card. */
+export function Note({ label = "Note", children }: { label?: string; children: ReactNode }) {
+  return (
+    <Reveal className="mx-auto max-w-3xl rounded-xl glass-card p-5">
+      <p className="eyebrow mb-2">{label}</p>
+      <div className="space-y-2 text-[0.98rem] leading-relaxed text-foreground/80">{children}</div>
+    </Reveal>
   );
 }
 
@@ -164,11 +233,11 @@ export function Dot({ level }: { level: number }) {
         <span
           key={i}
           className={cn(
-            "size-2 rounded-full",
+            "size-2 rounded-full transition-colors",
             i < level
               ? level === 3
                 ? "bg-accent"
-                : "bg-foreground/55"
+                : "bg-foreground/45"
               : "bg-border",
           )}
         />
@@ -206,7 +275,7 @@ export function CoverageTable({
       </thead>
       <tbody>
         {labels.map((label, i) => (
-          <tr key={label} className="border-b border-border/70 last:border-0 hover:bg-secondary/40">
+          <tr key={label} className="border-b border-border/70 last:border-0 hover:bg-accent-soft/40">
             <th scope="row" className="px-4 py-2.5 text-left font-medium text-foreground">
               {label}
             </th>

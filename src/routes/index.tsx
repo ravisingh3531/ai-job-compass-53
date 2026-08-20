@@ -7,6 +7,7 @@ import {
   DataTable,
   Callout,
   CoverageTable,
+  Reveal,
 } from "@/components/article/primitives";
 import {
   tocItems,
@@ -94,11 +95,25 @@ function TopBar() {
 
 function Hero() {
   return (
-    <header className="paper-grain -mx-5 border-b border-rule px-5 py-16 md:-mx-8 md:px-8 md:py-24">
-      <div className="mx-auto max-w-3xl">
-        <p className="eyebrow">India · 2026 edition · Job-outcome first</p>
-        <h1 className="mt-5 text-[2.4rem] leading-[1.08] md:text-6xl">
-          Top 10 Best AI Institutes in India (2026)
+    <header className="paper-grain relative -mx-5 overflow-hidden border-b border-rule px-5 py-16 md:-mx-8 md:px-8 md:py-24">
+      <div className="grid-lines pointer-events-none absolute inset-0 opacity-70 [mask-image:radial-gradient(80%_60%_at_50%_0%,black,transparent)]" />
+      <div
+        className="pointer-events-none absolute -right-24 -top-24 size-[26rem] rounded-full bg-accent/20 blur-3xl animate-float-slow"
+        aria-hidden
+      />
+      <div
+        className="pointer-events-none absolute -bottom-32 left-1/4 size-[22rem] rounded-full bg-chart-2/20 blur-3xl animate-float-slow"
+        aria-hidden
+      />
+      <div className="relative mx-auto max-w-3xl">
+        <p className="eyebrow rounded-full border border-accent/30 bg-card/70 px-3 py-1.5 backdrop-blur">
+          <span className="inline-block size-1.5 animate-pulse rounded-full bg-accent" />
+          India · 2026 edition · Job-outcome first
+        </p>
+        <h1 className="mt-6 text-[2.4rem] leading-[1.06] md:text-6xl">
+          <span className="text-gradient-blue">Top 10 Best AI Institutes</span>
+          <br />
+          in India (2026)
         </h1>
         <p className="mt-4 font-display text-xl text-accent md:text-2xl">
           An honest, job-outcome-first ranking.
@@ -118,23 +133,30 @@ function Hero() {
           upGrad, Great Learning, TalentSprint or a free route instead. If, by the end, you believe
           this ranking was bought, this page has failed at its only job.
         </p>
-        <dl className="mt-10 grid grid-cols-2 gap-x-6 gap-y-5 rule-top pt-7 sm:grid-cols-4">
+        <dl className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-4">
           {[
             ["500+", "live Indian AI JDs analysed"],
             ["60+", "people who hire AI talent"],
             ["200+", "tracked career transitions"],
             ["6", "weighted scoring criteria"],
-          ].map(([n, l]) => (
-            <div key={l}>
+          ].map(([n, l], i) => (
+            <Reveal
+              key={l}
+              delay={i * 90}
+              className="glass-card card-hover rounded-xl p-4"
+            >
               <dt className="font-display text-3xl font-semibold text-accent">{n}</dt>
               <dd className="mt-1 text-sm leading-snug text-muted-foreground">{l}</dd>
-            </div>
+              <span className="score-bar mt-3 block w-full opacity-60" />
+            </Reveal>
           ))}
         </dl>
       </div>
     </header>
   );
 }
+
+
 
 function FailurePatterns() {
   const patterns = [
@@ -177,7 +199,7 @@ function FailurePatterns() {
         {patterns.map((p) => (
           <article
             key={p.n}
-            className="rounded-xl border border-rule bg-card p-6 shadow-card transition-shadow hover:shadow-lift"
+            className="rounded-2xl border border-rule bg-card p-6 shadow-card card-hover"
           >
             <span className="font-mono text-xs tracking-[0.2em] text-accent">{p.n}</span>
             <h3 className="mt-3 text-xl">{p.t}</h3>
@@ -200,7 +222,7 @@ function CostOfWrongChoice() {
       </Prose>
       <Wide className="mt-9 grid gap-4 md:grid-cols-2">
         {costScenarios.map((s) => (
-          <div key={s.spend} className="rounded-xl border border-rule bg-card p-6 shadow-card">
+          <div key={s.spend} className="rounded-2xl border border-rule bg-card p-6 shadow-card card-hover">
             <p className="font-mono text-sm font-medium text-accent">You spend {s.spend}</p>
             <p className="mt-3 text-[0.95rem] leading-relaxed text-foreground/80">{s.body}</p>
           </div>
@@ -230,7 +252,7 @@ function ShortAnswer() {
   ];
   return (
     <Section eyebrow="📌 The short answer" title="Which is the best AI institute in India for 2026?">
-      <Wide className="max-w-4xl rounded-2xl border border-accent/30 bg-highlight/40 p-7 shadow-card md:p-10">
+      <Wide className="max-w-4xl rounded-2xl border border-accent/25 bg-highlight p-7 shadow-card md:p-10">
         <p className="text-lg leading-relaxed md:text-xl">
           For most Indian learners whose specific goal is employment in an applied AI or GenAI role
           in 2026, <strong>LogicMojo is the strongest overall choice</strong> among the top 10 — its
@@ -460,7 +482,7 @@ function SkillsStack() {
       </Prose>
       <Wide className="mt-10 grid gap-4 md:grid-cols-2">
         {layers.map((l) => (
-          <article key={l.n} className="rounded-xl border border-rule bg-card p-6 shadow-card">
+          <article key={l.n} className="rounded-2xl border border-rule bg-card p-6 shadow-card card-hover">
             <div className="flex items-baseline gap-3">
               <span className="font-mono text-xs tracking-[0.16em] text-accent">{l.n}</span>
               <h3 className="text-lg leading-snug">{l.title}</h3>
@@ -535,7 +557,7 @@ function Methodology() {
       </Prose>
       <Wide className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {criteria.map((c, i) => (
-          <article key={c.name} className="flex flex-col rounded-xl border border-rule bg-card p-6 shadow-card">
+          <article key={c.name} className="flex flex-col rounded-2xl border border-rule bg-card p-6 shadow-card card-hover">
             <div className="flex items-baseline justify-between gap-3">
               <span className="font-mono text-xs tracking-[0.16em] text-muted-foreground">
                 {String(i + 1).padStart(2, "0")}
@@ -588,8 +610,8 @@ function Rankings() {
         {masterRanking.map((r) => (
           <article
             key={r.rank}
-            className={`grid gap-5 rounded-xl border bg-card p-6 shadow-card transition-shadow hover:shadow-lift md:grid-cols-[auto_1fr_auto] md:items-center ${
-              r.rank === 1 ? "border-accent/40 bg-highlight/30" : "border-rule"
+            className={`grid gap-5 rounded-2xl border bg-card p-6 shadow-card card-hover md:grid-cols-[auto_1fr_auto] md:items-center ${
+              r.rank === 1 ? "border-accent/40 bg-highlight" : "border-rule"
             }`}
           >
             <div className="flex items-center gap-4 md:w-20 md:flex-col md:items-start">
@@ -833,7 +855,7 @@ function WhichForYou() {
             a: "Know a lot but built nothing → a portfolio-producing program. Built things but no calls → positioning and referrals. Calls but failed rounds → interview reps. Buying the wrong solution to the right problem is the most expensive mistake in this market.",
           },
         ].map((item, i) => (
-          <article key={item.q} className="rounded-xl border border-rule bg-card p-6 shadow-card">
+          <article key={item.q} className="rounded-2xl border border-rule bg-card p-6 shadow-card card-hover">
             <span className="font-display text-3xl font-semibold text-accent/60">{i + 1}</span>
             <h4 className="mt-2 text-lg leading-snug">{item.q}</h4>
             <p className="mt-3 text-[0.95rem] leading-relaxed text-muted-foreground">{item.a}</p>
@@ -859,7 +881,7 @@ function RedFlags() {
       </Prose>
       <Wide className="mt-9 grid gap-4 md:grid-cols-2">
         {redFlags.map((f, i) => (
-          <div key={f.t} className="flex gap-4 rounded-xl border border-rule bg-card p-5 shadow-card">
+          <div key={f.t} className="flex gap-4 rounded-2xl border border-rule bg-card p-5 shadow-card card-hover">
             <span className="font-mono text-xs text-destructive">
               {String(i + 1).padStart(2, "0")}
             </span>
@@ -906,7 +928,7 @@ function Roadmap() {
           {roadmap.map((p) => (
             <li key={p.phase} className="relative">
               <span className="absolute -left-[1.85rem] top-2 size-2.5 rounded-full bg-accent md:-left-[2.35rem]" />
-              <div className="rounded-xl border border-rule bg-card p-6 shadow-card">
+              <div className="rounded-2xl border border-rule bg-card p-6 shadow-card card-hover">
                 <div className="flex flex-wrap items-baseline gap-x-3">
                   <span className="font-mono text-[0.7rem] uppercase tracking-[0.16em] text-accent">
                     {p.phase}
