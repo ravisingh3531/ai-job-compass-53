@@ -27,7 +27,6 @@ import {
   layers,
   coverageTest,
   criteria,
-  masterRanking,
   scorecard,
   coverageRowLabels,
   coverageA,
