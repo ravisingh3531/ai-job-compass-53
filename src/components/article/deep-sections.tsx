@@ -465,34 +465,76 @@ export function FinalVerdict() {
 /* FAQ                                                                 */
 /* ------------------------------------------------------------------ */
 
+function FaqCard({
+  q,
+  a,
+  i,
+  variant,
+  openByDefault,
+}: {
+  q: string;
+  a: string;
+  i: number;
+  variant: number;
+  openByDefault?: boolean;
+}) {
+  const skins = [
+    "border-rule bg-card open:bg-secondary/30",
+    "border-accent/25 bg-accent-soft/35 open:bg-accent-soft/55",
+    "border-rule bg-gradient-to-br from-secondary/60 to-card",
+  ];
+  return (
+    <details
+      open={openByDefault}
+      className={cn(
+        "group card-hover relative overflow-hidden rounded-2xl border px-5 py-4 shadow-card transition-colors md:px-7",
+        skins[variant % skins.length],
+      )}
+    >
+      <span className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent/50 to-transparent" />
+      <summary className="flex cursor-pointer list-none items-start gap-3 font-display text-[1.05rem] font-semibold leading-snug md:text-lg">
+        <span className="font-mono text-[0.72rem] text-accent">{String(i).padStart(2, "0")}</span>
+        <span className="flex-1">{q}</span>
+        <span aria-hidden className="mt-1 shrink-0 text-accent transition-transform group-open:rotate-45">
+          +
+        </span>
+      </summary>
+      <p className="mt-3 pl-8 text-[0.98rem] leading-[1.75] text-foreground/80">{a}</p>
+    </details>
+  );
+}
+
 export function Faq() {
   return (
-    <Section id="faq" eyebrow="❓ FAQ" title="Frequently asked questions">
-      <Wide className="max-w-4xl space-y-3">
+    <Section
+      id="faq"
+      eyebrow="❓ FAQ"
+      title="Beginner questions, answered in full — GenAI courses, placement and timelines"
+    >
+      <Prose className="!mt-0">
+        <p>
+          The first ten answers are written for someone with no prior Generative AI experience choosing
+          where to spend money for the first time; the rest cover the wider Indian AI hiring market.
+          Every answer is designed to be actionable — what to ask, what to check, what to build.
+        </p>
+      </Prose>
+
+      <Wide className="mt-9 max-w-4xl space-y-3">
+        <p className="eyebrow mb-2">🧑‍🎓 Beginner essentials</p>
+        {beginnerFaqs.map((f, i) => (
+          <FaqCard key={f.q} q={f.q} a={f.a} i={i + 1} variant={i} openByDefault={i < 2} />
+        ))}
+      </Wide>
+
+      <Wide className="mt-10 max-w-4xl space-y-3">
+        <p className="eyebrow mb-2">🇮🇳 The wider 2026 market</p>
         {faqs.map((f, i) => (
-          <details
-            key={f.q}
-            open={i < 2}
-            className="group rounded-2xl border border-rule bg-card px-5 py-4 shadow-card transition-colors open:bg-secondary/30 md:px-7"
-          >
-            <summary className="flex cursor-pointer list-none items-start gap-3 font-display text-[1.05rem] font-semibold leading-snug md:text-lg">
-              <span className="font-mono text-[0.72rem] text-accent">
-                {String(i + 1).padStart(2, "0")}
-              </span>
-              <span className="flex-1">{f.q}</span>
-              <span
-                aria-hidden
-                className="mt-1 shrink-0 text-accent transition-transform group-open:rotate-45"
-              >
-                +
-              </span>
-            </summary>
-            <p className="mt-3 pl-8 text-[0.98rem] leading-[1.75] text-foreground/80">{f.a}</p>
-          </details>
+          <FaqCard key={f.q} q={f.q} a={f.a} i={beginnerFaqs.length + i + 1} variant={i + 2} />
         ))}
       </Wide>
     </Section>
   );
+
 }
 
 /* ------------------------------------------------------------------ */
