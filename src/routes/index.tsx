@@ -251,6 +251,11 @@ function FailurePatterns() {
           most resembles what a hiring manager screens for in 2026.
         </p>
         <p>
+          For a beginner the gap is wider still, because most Generative AI programs in India fail
+          beginners in one of two opposite ways: they are <em>too advanced</em> — transformers by week
+          two, no gated Python runway, so the learner quietly disappears around week five — or they are
+          <em>too shallow</em> — a comfortable ML course with a prompting chapter bolted on, no
+          retrieval evaluation, no agents, no deployment, and therefore no answers in a 2026 interview.
           Three failure patterns account for most of the money wasted on AI training in India right
           now.
         </p>
@@ -277,7 +282,9 @@ function CostOfWrongChoice() {
       <Prose className="!mt-0">
         <p>
           Composite scenarios — but spend any time in Indian AI-learning communities and you will
-          recognise every one.
+          recognise every one. For a beginner the cost is never only the fee: it is nine months of
+          evenings, the career momentum spent, and the discouragement that makes people conclude they
+          are “not technical enough” when in fact they were taught in the wrong order.
         </p>
       </Prose>
       <Wide className="mt-9 grid gap-4 md:grid-cols-2">
