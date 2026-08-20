@@ -13,6 +13,9 @@ import {
   updateLog,
   reviewers,
 } from "@/lib/deep-data";
+import { beginnerFaqs } from "@/lib/beginner-data";
+import { BeginnerDetailBlock } from "./beginner-sections";
+
 
 /* ------------------------------------------------------------------ */
 /* Deep dive: why LogicMojo is #1 — and where it isn't                 */
