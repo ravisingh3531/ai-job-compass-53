@@ -13,6 +13,11 @@ import {
   updateLog,
   reviewers,
 } from "@/lib/deep-data";
+import { beginnerFaqs } from "@/lib/beginner-data";
+import { BeginnerDetailBlock } from "./beginner-sections";
+import { cn } from "@/lib/utils";
+
+
 
 /* ------------------------------------------------------------------ */
 /* Deep dive: why LogicMojo is #1 — and where it isn't                 */
@@ -219,15 +224,27 @@ export function InDepthReviews() {
     <Section
       id="reviews"
       eyebrow="✍️ In-depth reviews"
-      title="The 10 best AI institutes in India for 2026, reviewed one by one"
+      title="All 10 GenAI courses reviewed — beginner-friendliness, curriculum depth and job assistance"
     >
       <Prose className="!mt-0">
         <p>
-          Accuracy note for this section: fees, durations, affiliations and structures change
-          frequently — every figure is indicative as of publication; verify current terms with each
-          provider before paying. Provider claims are labelled as such.
+          Each review below carries a second half written specifically for someone starting from zero:
+          entry prerequisites, the foundational ramp-up in Python and machine learning, doubt-clearing
+          and teaching-assistant support, the step-by-step teaching method, mentorship access, capstone
+          and industry-grade Generative AI projects, the tools and datasets you actually touch, and the
+          full placement machinery — hiring partners, claimed placement rate, mock interview rounds,
+          resume workshops, LinkedIn optimisation, career counselling and how long job support lasts
+          after the course ends. A verified beginner feedback card names the prior background, role,
+          company type and salary band.
+        </p>
+        <p>
+          Accuracy note: fees, durations, affiliations and structures change frequently — every figure
+          is indicative as of publication; verify current terms with each provider before paying.
+          Provider claims are labelled as such, learner feedback is learner-reported and unaudited, and
+          salaries are shown as bands rather than headline maximums.
         </p>
       </Prose>
+
       <Wide className="mt-10 space-y-6">
         {reviews.map((r) => (
           <article
@@ -302,7 +319,10 @@ export function InDepthReviews() {
               </div>
             </div>
 
+            <BeginnerDetailBlock rank={r.rank} />
+
             <div className="border-t border-rule bg-secondary/40 px-6 py-5 md:px-8">
+
               <p className="text-[0.98rem] leading-relaxed">
                 <span className="font-medium">Verdict: </span>
                 {r.verdict}
@@ -447,34 +467,76 @@ export function FinalVerdict() {
 /* FAQ                                                                 */
 /* ------------------------------------------------------------------ */
 
+function FaqCard({
+  q,
+  a,
+  i,
+  variant,
+  openByDefault,
+}: {
+  q: string;
+  a: string;
+  i: number;
+  variant: number;
+  openByDefault?: boolean;
+}) {
+  const skins = [
+    "border-rule bg-card open:bg-secondary/30",
+    "border-accent/25 bg-accent-soft/35 open:bg-accent-soft/55",
+    "border-rule bg-gradient-to-br from-secondary/60 to-card",
+  ];
+  return (
+    <details
+      open={openByDefault}
+      className={cn(
+        "group card-hover relative overflow-hidden rounded-2xl border px-5 py-4 shadow-card transition-colors md:px-7",
+        skins[variant % skins.length],
+      )}
+    >
+      <span className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent/50 to-transparent" />
+      <summary className="flex cursor-pointer list-none items-start gap-3 font-display text-[1.05rem] font-semibold leading-snug md:text-lg">
+        <span className="font-mono text-[0.72rem] text-accent">{String(i).padStart(2, "0")}</span>
+        <span className="flex-1">{q}</span>
+        <span aria-hidden className="mt-1 shrink-0 text-accent transition-transform group-open:rotate-45">
+          +
+        </span>
+      </summary>
+      <p className="mt-3 pl-8 text-[0.98rem] leading-[1.75] text-foreground/80">{a}</p>
+    </details>
+  );
+}
+
 export function Faq() {
   return (
-    <Section id="faq" eyebrow="❓ FAQ" title="Frequently asked questions">
-      <Wide className="max-w-4xl space-y-3">
+    <Section
+      id="faq"
+      eyebrow="❓ FAQ"
+      title="Beginner questions, answered in full — GenAI courses, placement and timelines"
+    >
+      <Prose className="!mt-0">
+        <p>
+          The first ten answers are written for someone with no prior Generative AI experience choosing
+          where to spend money for the first time; the rest cover the wider Indian AI hiring market.
+          Every answer is designed to be actionable — what to ask, what to check, what to build.
+        </p>
+      </Prose>
+
+      <Wide className="mt-9 max-w-4xl space-y-3">
+        <p className="eyebrow mb-2">🧑‍🎓 Beginner essentials</p>
+        {beginnerFaqs.map((f, i) => (
+          <FaqCard key={f.q} q={f.q} a={f.a} i={i + 1} variant={i} openByDefault={i < 2} />
+        ))}
+      </Wide>
+
+      <Wide className="mt-10 max-w-4xl space-y-3">
+        <p className="eyebrow mb-2">🇮🇳 The wider 2026 market</p>
         {faqs.map((f, i) => (
-          <details
-            key={f.q}
-            open={i < 2}
-            className="group rounded-2xl border border-rule bg-card px-5 py-4 shadow-card transition-colors open:bg-secondary/30 md:px-7"
-          >
-            <summary className="flex cursor-pointer list-none items-start gap-3 font-display text-[1.05rem] font-semibold leading-snug md:text-lg">
-              <span className="font-mono text-[0.72rem] text-accent">
-                {String(i + 1).padStart(2, "0")}
-              </span>
-              <span className="flex-1">{f.q}</span>
-              <span
-                aria-hidden
-                className="mt-1 shrink-0 text-accent transition-transform group-open:rotate-45"
-              >
-                +
-              </span>
-            </summary>
-            <p className="mt-3 pl-8 text-[0.98rem] leading-[1.75] text-foreground/80">{f.a}</p>
-          </details>
+          <FaqCard key={f.q} q={f.q} a={f.a} i={beginnerFaqs.length + i + 1} variant={i + 2} />
         ))}
       </Wide>
     </Section>
   );
+
 }
 
 /* ------------------------------------------------------------------ */
