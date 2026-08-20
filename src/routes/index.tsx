@@ -610,8 +610,8 @@ function Rankings() {
         {masterRanking.map((r) => (
           <article
             key={r.rank}
-            className={`grid gap-5 rounded-xl border bg-card p-6 shadow-card transition-shadow hover:shadow-lift md:grid-cols-[auto_1fr_auto] md:items-center ${
-              r.rank === 1 ? "border-accent/40 bg-highlight/30" : "border-rule"
+            className={`grid gap-5 rounded-2xl border bg-card p-6 shadow-card card-hover md:grid-cols-[auto_1fr_auto] md:items-center ${
+              r.rank === 1 ? "border-accent/40 bg-highlight" : "border-rule"
             }`}
           >
             <div className="flex items-center gap-4 md:w-20 md:flex-col md:items-start">
