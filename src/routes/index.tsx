@@ -50,6 +50,7 @@ import {
   ProfileRankingList,
   ProfileScorecard,
 } from "@/components/article/profile-sections";
+import { CompareMode } from "@/components/article/compare-mode";
 
 const title = "Top 10 Best AI Institutes in India (2026) — Job-Outcome Ranking";
 const description =
@@ -101,6 +102,7 @@ function Index() {
         <SkillsStack />
         <Methodology />
         <Rankings />
+        <CompareMode />
         <WhyLogicMojo />
         <LogicMojoDeepDive />
         <InDepthReviews />
