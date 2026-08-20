@@ -10,6 +10,15 @@ import {
   Reveal,
 } from "@/components/article/primitives";
 import {
+  LogicMojoDeepDive,
+  InDepthReviews,
+  DecisionTree,
+  FinalVerdict,
+  Faq,
+  TrustBlocks,
+  AboutContact,
+} from "@/components/article/deep-sections";
+import {
   tocItems,
   tiers,
   barShift,
