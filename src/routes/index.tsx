@@ -94,11 +94,25 @@ function TopBar() {
 
 function Hero() {
   return (
-    <header className="paper-grain -mx-5 border-b border-rule px-5 py-16 md:-mx-8 md:px-8 md:py-24">
-      <div className="mx-auto max-w-3xl">
-        <p className="eyebrow">India · 2026 edition · Job-outcome first</p>
-        <h1 className="mt-5 text-[2.4rem] leading-[1.08] md:text-6xl">
-          Top 10 Best AI Institutes in India (2026)
+    <header className="paper-grain relative -mx-5 overflow-hidden border-b border-rule px-5 py-16 md:-mx-8 md:px-8 md:py-24">
+      <div className="grid-lines pointer-events-none absolute inset-0 opacity-70 [mask-image:radial-gradient(80%_60%_at_50%_0%,black,transparent)]" />
+      <div
+        className="pointer-events-none absolute -right-24 -top-24 size-[26rem] rounded-full bg-accent/20 blur-3xl animate-float-slow"
+        aria-hidden
+      />
+      <div
+        className="pointer-events-none absolute -bottom-32 left-1/4 size-[22rem] rounded-full bg-chart-2/20 blur-3xl animate-float-slow"
+        aria-hidden
+      />
+      <div className="relative mx-auto max-w-3xl">
+        <p className="eyebrow rounded-full border border-accent/30 bg-card/70 px-3 py-1.5 backdrop-blur">
+          <span className="inline-block size-1.5 animate-pulse rounded-full bg-accent" />
+          India · 2026 edition · Job-outcome first
+        </p>
+        <h1 className="mt-6 text-[2.4rem] leading-[1.06] md:text-6xl">
+          <span className="text-gradient-blue">Top 10 Best AI Institutes</span>
+          <br />
+          in India (2026)
         </h1>
         <p className="mt-4 font-display text-xl text-accent md:text-2xl">
           An honest, job-outcome-first ranking.
@@ -118,23 +132,30 @@ function Hero() {
           upGrad, Great Learning, TalentSprint or a free route instead. If, by the end, you believe
           this ranking was bought, this page has failed at its only job.
         </p>
-        <dl className="mt-10 grid grid-cols-2 gap-x-6 gap-y-5 rule-top pt-7 sm:grid-cols-4">
+        <dl className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-4">
           {[
             ["500+", "live Indian AI JDs analysed"],
             ["60+", "people who hire AI talent"],
             ["200+", "tracked career transitions"],
             ["6", "weighted scoring criteria"],
-          ].map(([n, l]) => (
-            <div key={l}>
+          ].map(([n, l], i) => (
+            <Reveal
+              key={l}
+              delay={i * 90}
+              className="glass-card card-hover rounded-xl p-4"
+            >
               <dt className="font-display text-3xl font-semibold text-accent">{n}</dt>
               <dd className="mt-1 text-sm leading-snug text-muted-foreground">{l}</dd>
-            </div>
+              <span className="score-bar mt-3 block w-full opacity-60" />
+            </Reveal>
           ))}
         </dl>
       </div>
     </header>
   );
 }
+
+
 
 function FailurePatterns() {
   const patterns = [
