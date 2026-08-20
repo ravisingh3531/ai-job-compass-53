@@ -68,15 +68,25 @@ function Index() {
         <Methodology />
         <Rankings />
         <WhyLogicMojo />
+        <LogicMojoDeepDive />
+        <InDepthReviews />
         <WhichForYou />
+        <DecisionTree />
         <RedFlags />
         <Roadmap />
+        <FinalVerdict />
         <Verdict />
+        <Faq />
+        <TrustBlocks />
+        <div className="pb-16">
+          <AboutContact />
+        </div>
       </main>
       <Footer />
     </div>
   );
 }
+
 
 function TopBar() {
   return (
